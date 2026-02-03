@@ -1,0 +1,27 @@
+[package]
+name = "aster_codegen"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "aster_codegen"
+
+[dependencies]
+aster_common = { path = "../aster_common" }
+common = { path = "../common" }
+darling = { workspace = true }
+inventory = "0.3.20"
+proc-macro2 = { workspace = true }
+quote = { workspace = true }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1"
+swc_atoms = "9.0.0"
+swc_common = "18.0.1"
+swc_ecma_ast = "20.0.1"
+swc_ecma_codegen = "23.0.0"
+swc_ecma_parser = "33.0.1"
+swc_ecma_visit = "20.0.0"
+syn = { workspace = true }
+thiserror = "2.0.12"
+toml = "0.9.5"
+toml_edit = "0.23.4"
