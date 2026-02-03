@@ -1,0 +1,83 @@
+/* Transition opacity */
+
+.opacity-enter-active,
+.opacity-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.opacity-enter-from,
+.opacity-leave-to {
+  opacity: 0;
+}
+
+/* Transition scale */
+
+.scale-enter-active,
+.scale-leave-active {
+  transition: scale 0.2s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  scale: 0;
+}
+
+/* Transition x-slide left -> right */
+.x-slide-enter-active,
+.x-slide-leave-active,
+.l-r-enter-active,
+.l-r-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.x-slide-enter-from,
+.x-slide-leave-to,
+.l-r-enter-from,
+.l-r-leave-to {
+  transform: translateX(-60vw);
+}
+
+/* Transition -x-slide right -> left */
+.-x-slide-enter-active,
+.-x-slide-leave-active,
+.r-l-enter-active,
+.r-l-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.-x-slide-enter-from,
+.-x-slide-leave-to,
+.r-l-enter-from,
+.r-l-leave-to {
+  transform: translateX(60vw);
+}
+
+/* Transition y-slide top -> bottom */
+.y-slide-enter-active,
+.y-slide-leave-active,
+.t-b-enter-active,
+.t-b-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.y-slide-enter-from,
+.y-slide-leave-to,
+.t-b-enter-from,
+.t-b-leave-to {
+  transform: translateY(-60vh);
+}
+
+/* Transition -y-slide bottom -> top */
+.-y-slide-enter-active,
+.-y-slide-leave-active,
+.b-t-enter-active,
+.b-t-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.-y-slide-enter-from,
+.-y-slide-leave-to,
+.b-t-enter-from,
+.b-t-leave-to {
+  transform: translateY(60vh);
+}

@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "./style/transition.css";
+@plugin "daisyui";
+
+* {
+  user-select: none;
+}
+
+@theme {
+  --animate-flash: /* "" */ ;
+  --animate-flash-once: /* "" */ ;
+  --animate-appear-scale: appear-scale 0.3s forwards;
+  @keyframes appear-scale {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+@keyframes flash-white {
+  0%,
+  50%,
+  100% {
+    opacity: 0;
+  }
+  25%,
+  75% {
+    opacity: 0.75; /* 白叠层的透明度，按需求调整 */
+  }
+}
+@keyframes flash-white-once {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.75; /* 白叠层的透明度，按需求调整 */
+  }
+}
+.animate-flash {
+  @apply relative overflow-hidden;
+}
+.animate-flash::after {
+  content: "";
+  @apply absolute inset-0 bg-white pointer-events-none;
+  animation: flash-white 1s;
+  opacity: 0; /* 确保初始隐藏 */
+}
+.animate-flash-once {
+  @apply relative overflow-hidden;
+}
+.animate-flash-once::after {
+  content: "";
+  @apply absolute inset-0 bg-white pointer-events-none;
+  animation: flash-white-once 0.5s;
+  opacity: 0; /* 确保初始隐藏 */
+}
+:root {
+  interpolate-size: allow-keywords;
+}
