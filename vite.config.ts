@@ -1,13 +1,31 @@
 import { defineConfig } from "vite";
+import { resolve } from "node:path";
 import vue from "@vitejs/plugin-vue";
-
-// @ts-expect-error process is a nodejs global
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import tailwindcss from "@tailwindcss/vite";
+import vueDevTools from "vite-plugin-vue-devtools";
+import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
+import env from "./plugins/env.vite";
+import VueMacros from "vue-macros/vite";
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [vue()],
-
+  plugins: [
+    VueMacros({
+      plugins: { vue: vue(), vueJsx: vueJsx() },
+    }),
+    tailwindcss(),
+    // vueDevTools({ launchEditor: "cursor" }),
+    vueDevTools({ launchEditor: "code" }),
+    VueI18nPlugin({}),
+    env(),
+  ],
+  resolve: {
+    alias: {
+      "@": "./src",
+    },
+  },
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
   // 1. prevent vite from obscuring rust errors
@@ -27,6 +45,14 @@ export default defineConfig(async () => ({
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
       ignored: ["**/src-tauri/**"],
+    },
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+        js_engine: resolve(__dirname, "js_engine/index.html"),
+      },
     },
   },
 }));

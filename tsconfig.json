@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -13,13 +13,23 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-
+    "jsxImportSource": "vue",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "stripInternal": true,
+    "paths": {
+      "@": ["./src"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/invoke/actions/web.ts_", "src/invoke/actions/program.ts.ignore", "src/invoke/actions/web.ts.ignore", "src/invoke/actions/web.ts_"],
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "vueCompilerOptions": {
+    "plugins": ["vue-macros/volar"]
+  }
 }
