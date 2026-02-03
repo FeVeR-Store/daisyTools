@@ -1,0 +1,29 @@
+#:schema schema.json
+
+[package]
+name = "aster_loader"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "aster_loader"
+
+[dependencies]
+aster_common = { path = "../aster_common" }
+aster_macro = { path = "../aster_macro" }
+common = { path = "../common" }
+inventory = "0.3.20"
+serde_json = { workspace = true }
+tokio = { version = "1.47.1", features = ["full"] }
+
+[dependencies.web]
+path = "../actions/web"
+
+# A set of dependencies that remain unchanged and are always preserved during dependency updates.
+# The format of [dev-dependencies] is equivalent to [dependencies]
+[fixed-dependencies]
+aster_common = { path = "../aster_common" }
+aster_macro = { path = "../aster_macro" }
+common = { path = "../common" }
+inventory = "0.3.20"
+tokio = { version = "1.47.1", features = ["full"] }
