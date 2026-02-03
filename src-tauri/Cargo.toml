@@ -1,25 +1,108 @@
 [package]
 name = "daisytools"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
 edition = "2021"
+description = "A Tauri App"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [
+  "actions/web",
+  "aster_codegen",
+  "aster_common",
+  "aster_loader",
+  "aster_macro",
+  "common",
+  "vase",
+  "vase_macro",
+  "vase_scan",
+  "vase_test",
+  "vasing",
+  "vasing_macro",
+]
+
+[workspace.dependencies]
+anyhow = "1.0.99"
+darling = "0.21.3"
+log = "0.4.28"
+notify = "8.2.0"
+notify-debouncer-full = "0.6.0"
+proc-macro2 = "1.0"
+quote = "1.0"
+rand = "0.9.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["arbitrary_precision"] }
+# proc-macro
+syn = { version = "2.0", features = ["full", "visit-mut"] }
+thiserror = "2.0.16"
+time = { version = "0.3.43", features = ["local-offset"] }
+tokio = { version = "1.47.1", features = ["full"] }
+uuid = { version = "1.18.1", features = ["serde", "v4"] }
+windows-service = "0.8.0"
 
 [lib]
+crate-type = ["cdylib", "rlib", "staticlib"]
 # The `_lib` suffix may seem redundant but it is necessary
 # to make the lib name unique and wouldn't conflict with the bin name.
 # This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
 name = "daisytools_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
+
+[dependencies]
+aster_codegen = { path = "./aster_codegen" }
+aster_loader = { path = "./aster_loader" }
+aster_macro = { path = "./aster_macro" }
+bytes = "1.10.0"
+chrono = "0.4"
+clap = { version = "4.5.27", features = ["derive"] }
+common = { path = "common" }
+cron = "0.15"
+crossbeam-channel = "0.5.14"
+dirs = "6.0.0"
+ftail = "0.2.0"
+log = { workspace = true }
+notify = { workspace = true }
+notify-debouncer-full = { workspace = true }
+num_cpus = "1.0"
+paste = "1.0"
+# 下面的依赖最好移除
+privilege = "0.3"
+serde = { workspace = true }
+serde_json = { workspace = true }
+tauri = { version = "2.8.5", features = ["unstable"] }
+tauri-plugin-fs = { version = "2.4.0", features = ["watch"] }
+tauri-plugin-http = { version = "2.5.0", features = ["json"] }
+tauri-plugin-notification = "2.3.0"
+tauri-plugin-opener = "2.4.0"
+thiserror = { workspace = true }
+windows = { version = "0.61.3", features = [
+  "Win32_Foundation",
+  "Win32_Security",
+  "Win32_Security_Authorization",
+  "Win32_Storage_FileSystem",
+  "Win32_System_Com",
+  "Win32_System_IO",
+  "Win32_System_Pipes",
+  "Win32_System_Services",
+  "Win32_System_Threading",
+  "Win32_UI_Shell",
+  "Win32_UI_WindowsAndMessaging",
+] }
+windows-service = { workspace = true }
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
+winres = "0.1"
 
-[dependencies]
-tauri = { version = "2", features = [] }
-tauri-plugin-opener = "2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+[features]
+default = []
 
+[profile.dev]
+incremental = true  # 以较小的步骤编译您的二进制文件。
+
+[profile.release]
+opt-level = "s"  # 优先考虑小的二进制文件大小。如果您更喜欢速度，请使用 `3`。
+strip = true  # 确保移除调试符号。
+lto = true  # 启用链接时优化。
+panic = "abort"  # 通过禁用 panic 处理程序来提高性能。
+codegen-units = 1  # 允许 LLVM 执行更好的优化。
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
