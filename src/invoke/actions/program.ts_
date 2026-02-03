@@ -1,0 +1,57 @@
+import { defineCard } from "../helper";
+
+export default defineCard({
+  parent: "action.program",
+  name: "program_action_handwrite",
+  args: { code: "String", lang: "String" }, // {} as Data<ProgramActionProps>,
+  litCardView: ({ litCardInfo }) => {
+    const data = litCardInfo.data;
+    return [
+      {
+        type: "code",
+        title: "代码",
+        value: data.code,
+        description: "要执行的代码",
+      },
+      {
+        type: "text",
+        title: "语言",
+        value: data.lang,
+        description: "xxxx",
+      },
+    ];
+  },
+  view: {
+    title: "",
+    form: [
+      {
+        name: "code",
+        type: "Code",
+      },
+      {
+        name: "lang",
+        type: "Option",
+        data: [{ label: "javascript", value: "js" }],
+      },
+    ],
+  },
+  i18n: {
+    "zh-CN": {
+      title: "执行代码",
+      args_description: "接收一个参数code, 表示指定的执行的代码",
+      description: "执行一段代码",
+      litArgs: "代码",
+      code: "代码内容",
+      lang: "语言",
+    },
+    en: {
+      title: "Execute Code",
+      args_description:
+        "Receive a parameter code, representing the specified code to be executed",
+      description: "Execute a code segment",
+      litArgs: "Code",
+      code: "Code Content",
+      lang: "Language",
+    },
+  },
+});
