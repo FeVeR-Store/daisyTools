@@ -4,19 +4,13 @@
   "version": "0.1.0",
   "identifier": "com.daisytools.app",
   "build": {
-    "beforeDevCommand": "pnpm dev",
+    "beforeDevCommand": "pnpm dev:frontend",
     "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },
   "app": {
-    "windows": [
-      {
-        "title": "daisytools",
-        "width": 800,
-        "height": 600
-      }
-    ],
+    "windows": [],
     "security": {
       "csp": null
     }
