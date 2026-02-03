@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<html>
+  <script type="module">
+    import { Buffer } from "buffer/";
+    // 需要为@endo/module-source设置，用于ses
+    globalThis.Buffer = Buffer;
+    globalThis.process = { env: { BABEL_TYPES_8_BREAKING: "true" } };
+  </script>
+  <script type="module" src="/src/js_engine/main.ts"></script>
+</html>
